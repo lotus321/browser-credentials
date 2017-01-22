@@ -1,14 +1,14 @@
-## A Native Windows Password Recovery Tool for Chrome
+# A Native Windows Password Recovery Tool for Chrome
 
-# Overview 
+## Overview 
 The Chrome browser stores login information of websites in a file called Login Data. The CryptUnprotectData  WinAPI is then used to decrypt the password BLOB. Note that this API will only decrypt data stored on a local machine. Please close all running chrome process before running the application. See the further implementation section for a better understanding of why this step is necessary.
 
 
-                                      ---- Compiling the code ----
+## Compiling the code
 I used the Developer Command Prompt for Visual Studio 2015.To compile enter the commands 'cl /EHsc chrome.cpp memory.cpp database.cpp utility.cpp http.cpp socket.cpp module.c. Tested on windows 7 (32-bit) and windows 10(64 -bit). 
 
  
-                                    ---- Decrypting the Password ----
+## Decrypting the Password 
 In the first approach, I used the Sqlite3 DLL to simplify the parsing of the login credentials from the Login Data file. This approach is the recommended way to parsing database files. 
 The only downside to this approach is that I have to fetch the DLL from a remote host, and dynamically link it at runtime.
 The DLL is loaded directly in memory, without having to save it to the Disk. This is necessary because certain security programs, AVs in particular, will block the process of saving an executable file to the disk.
