@@ -29,4 +29,7 @@ using the command `cl /EHsc ....cpp ....cpp`,  where `....cpp` are the input C/C
 ###### Snapshot On Windows 7 (64-bit)
 ![compile](https://cloud.githubusercontent.com/assets/22178295/22188498/e12a4d5a-e169-11e6-8cfe-5366c320c29b.PNG).
 
+### Testing
+Tested on Windows 7 and 10
+
 -------------------------------------------------------------------------------------------------------------------------------
