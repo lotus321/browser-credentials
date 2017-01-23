@@ -2,7 +2,7 @@
 
 ### Overview 
 The Chrome browser stores login information of websites in a file called Login Data. The CryptUnprotectData  WinAPI is then used to decrypt the password BLOB. Note that this API will only decrypt data stored on a local machine.
-Compiled with Developer Command Prompt for Visual Studio 2015, refer to the [compile.md](https://github.com/mattbowa/recovery/blob/master/compile.md) source file.
+
 
  
 ### Decrypting the Password 
@@ -21,5 +21,12 @@ Using Some windows APIs for example HeapAlloc() with GetProcessHeap() instead of
 
 ### Current Issues 
 When Chrome is running, I noticed that to blocks access to some sensitive folders, in this case the User Data folder which is located in the AppData folder. This means we can't access the file which stores the login credentials, if chrome is running. The temporary solutions I have used in this project is to terminate the running chrome process. This brute force approach is not ideal because it can cause a browser to lose important data if it is abruptly terminated. A much better approach would is code injection. With this technique, we can inject our executable code in a running chrome instance and access the browser's folders without restriction.	
+
+### Compiling The Source Code
+The source code is compiled with Developer Command Prompt for Visual Studio 2015
+using the command `cl /EHsc .... ....` where `....` are the input C/C++ source files.
+
+###### Snapshot On Windows 7 (64-bit)
+![compile](https://cloud.githubusercontent.com/assets/22178295/22188498/e12a4d5a-e169-11e6-8cfe-5366c320c29b.PNG).
 
 -------------------------------------------------------------------------------------------------------------------------------
