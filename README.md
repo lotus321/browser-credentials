@@ -3,7 +3,7 @@
 ### Overview 
 The Chrome browser stores login information of websites in a file called Login Data. The CryptUnprotectData  WinAPI is then used to decrypt the password BLOB. Note that this API will only decrypt data stored on a local machine.
 Please close all running chrome process before running the application. See the further implementation section for a better understanding of why this step is necessary.
-Compiled with Developer Command Prompt for Visual Studio 2015, refer to the [compile.md]().
+Compiled with Developer Command Prompt for Visual Studio 2015, refer to the [compile.md](https://github.com/mattbowa/recovery/blob/master/compile.md) source file.
 
 
 
