@@ -12,14 +12,16 @@ The project will present two approach to parsing this database file.
  
 ### Parsing with Database Library
 Using the Sqlite3 DLL is the recommenden approach as it simplifies the process of parsing the login credentials and runs on both 32 & 64 bits Windows.
-To avoid statically linking a large library file, the sqlite3.dll file is downloaded from a remote and dynamically linked at runtime.
-The library will have to be loaded directly into a process's memory space, without touching the disk because certain security programs, AVs in particular, will prevent a program from saving an executable file.
+The library fetched from a remote server and loaded directly into a process's memory space. This is necessary becasue  certain security programs, AVs in particular, will prevent a program from saving an executable file.
 By executing the DLL in-memory, the program cannot depend on the windows loader (and certainly can't use the `LoadLibrary` WinAPI) in loading the executable file.
 To achieve the above, the program will haave to manually allocate memory (with executable rights), resolve all external dependences, perform base relocation, locate the entry point and finally pass control to the DLL.
 
 
 ### Raw Binary Parsing
-In the second approach, I removed dependence on the Sqlite3 (database) DLL, and manually parsed the database file to locate the password BLOB, and copy the corresponding 260 bytes of data But why go through all this trouble? The second approach was more about challenging myself and playing around with Assembler code.
+To avoid statically linking a large library file, the second approach parses the login credentials manually.
+As stated earlier, the username\email is stored in plain. 
+Using a Hex Editor, the Login Data file is analysed
+In the second approach, the dependence on the Sqlite3 (database) DLL, and manually parsed the database file to locate the password BLOB, and copy the corresponding 260 bytes of data But why go through all this trouble? The second approach was more about challenging myself and playing around with Assembler code.
 
 
 
