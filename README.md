@@ -1,17 +1,26 @@
 ## A Native Windows Password Recovery Tool for Chrome
 
-### Overview 
-The Chrome browser stores login information of websites in a file called Login Data. The CryptUnprotectData  WinAPI is then used to decrypt the password BLOB. Note that this API will only decrypt data stored on a local machine.
+### Introduction
 
+Most modern Web Browsers gives the user the option of saving Login details when they visit website that require usernames/passwords to log in. 
+This project will detail how to decrypt the login credentials stored by Chrome. 
+
+### Overview
+The Chrome browser stores login information of websites in a file called Login Data. This file, which is located in a user's AppData folder, stores the login crendentils in a database formart. The user's email/username is stored in plain text,and the password is encrypted as a 230 byte binary BLOB 
+The project will present two approach to parsing this database file.
 
  
-### Decrypting the Password 
-In the first approach, I used the Sqlite3 DLL to simplify the parsing of the login credentials from the Login Data file. This approach is the recommended way to parsing database files. 
-The only downside to this approach is that I have to fetch the DLL from a remote host, and dynamically link it at runtime.
-The DLL is loaded directly in memory, without having to save it to the Disk. This is necessary because certain security programs, AVs in particular, will block the process of saving an executable file to the disk.
-By executing the DLL directly in-memory, we cannot depend on the windows loader (and certainly can't use the LoadLibrary WinAPI.
-This means that we have to manually allocate memory (with executable rights), resolve all external dependences, perform base relocation, locate the entry point and finally pass control to the DLL.
-In the second approach, I removed dependence on the Sqlite3 (database) DLL, and manually parsed the database file to locate the password BLOB, and copy the corresponding 260 bytes of data But why go through all this trouble? The second approach was more about challenging myself and playing around with Assembler code. 
+### Parsing with Database Library
+Using the Sqlite3 DLL is the recommenden approach as it simplifies the process of parsing the login credentials and runs on both 32 & 64 bits Windows.
+To avoid statically linking a large library file, the sqlite3.dll file is downloaded from a remote and dynamically linked at runtime.
+The library will have to be loaded directly into a process's memory space, without touching the disk because certain security programs, AVs in particular, will prevent a program from saving an executable file.
+By executing the DLL in-memory, the program cannot depend on the windows loader (and certainly can't use the `LoadLibrary` WinAPI) in loading the executable file.
+To achieve the above, the program will haave to manually allocate memory (with executable rights), resolve all external dependences, perform base relocation, locate the entry point and finally pass control to the DLL.
+
+
+### Raw Binary Parsing
+In the second approach, I removed dependence on the Sqlite3 (database) DLL, and manually parsed the database file to locate the password BLOB, and copy the corresponding 260 bytes of data But why go through all this trouble? The second approach was more about challenging myself and playing around with Assembler code.
+
 
 
 ### Why Implement Custom Memory Functions
