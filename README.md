@@ -3,15 +3,15 @@
 ### Introduction
 
 Most modern Web Browsers give users the option of saving Login details when they visit website that require a username and password to log in. 
-The Chrome browser stores login information of websites in a file called Login Data. This file, which is located in a user's AppData folder, stores the login crendentils in a database formart. The user's email/username is stored in plain text,and the password is encrypted as a 230 byte binary BLOB 
-The project will present two approach to parsing database file, where Chrome stores the credentials, for the purpose of decrypting the login passwords.
+The Chrome browser stores these credentials in a file called Login Data. This file, which is located in a user's AppData folder, stores the data in a database format. The Login ID (username or email) is stored in plain text and the password is encrypted as a 230 byte binary BLOB. To extract this password BLOB, two approaches will be employed; using a database libray and raw binary parsing.
+
 
  
 ### Parsing with Database Library
-Using the Sqlite3 DLL is the recommenden approach as it simplifies the process of parsing the login credentials and runs on both 32 & 64 bits Windows.
-The library fetched from a remote server and loaded directly into a process's memory space. This is necessary becasue  certain security programs, AVs in particular, will prevent a program from saving an executable file.
-By executing the DLL in-memory, the program cannot depend on the windows loader (and certainly can't use the `LoadLibrary` WinAPI) in loading the executable file.
-To achieve the above, the program will haave to manually allocate memory (with executable rights), resolve all external dependences, perform base relocation, locate the entry point and finally pass control to the DLL.
+Using the Sqlite3 DLL is the recommended approach as it simplifies the process of parsing the login credentials and runs on both 32 & 64 bits Windows.
+To reduce the size of the executable file, the dll library is not staticaly linked. Instaed, the library is fetched from a remote server and dynamically loaded into the process's memory space. This is necessary becasue  certain security programs, AVs in particular, will prevent a program from saving an executable file.
+By executing the DLL in-memory, the program cannot depend on the windows loader (and certainly can't use the `LoadLibrary` WinAPI).
+To function as intended, the program will have to manually allocate memory (with executable rights), resolve all external dependences, perform base relocation, locate the entry point and finally pass control to the DLL.
 
 
 ### Raw Binary Parsing
