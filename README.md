@@ -16,8 +16,8 @@ To function as intended, the program will have to manually allocate memory (with
 
 ### Raw Binary Parsing
 To avoid statically linking a large library file, this approach parses the login credentials manually.
-As stated earlier, the username\email is stored in plain. 
-Using a Hex Editor, the Login Data file is analysed manually parsed, using Inline Assembler, to locate the password BLOB.
+As stated earlier, the username\email is stored in plain text. 
+Using a Hex Editor, the Login Data file is parsed manually, using Inline Assembler, to locate the password BLOB.
 But why go through all this trouble? The second approach was more about challenging myself and playing around with Assembler code.
 
 
