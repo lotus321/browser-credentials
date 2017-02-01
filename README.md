@@ -2,12 +2,9 @@
 
 ### Introduction
 
-Most modern Web Browsers gives the user the option of saving Login details when they visit website that require usernames/passwords to log in. 
-This project will detail how to decrypt the login credentials stored by Chrome. 
-
-### Overview
+Most modern Web Browsers give users the option of saving Login details when they visit website that require a username and password to log in. 
 The Chrome browser stores login information of websites in a file called Login Data. This file, which is located in a user's AppData folder, stores the login crendentils in a database formart. The user's email/username is stored in plain text,and the password is encrypted as a 230 byte binary BLOB 
-The project will present two approach to parsing this database file.
+The project will present two approach to parsing database file, where Chrome stores the credentials, for the purpose of decrypting the login passwords.
 
  
 ### Parsing with Database Library
