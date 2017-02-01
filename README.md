@@ -28,7 +28,7 @@ Using Some windows APIs for example HeapAlloc() with GetProcessHeap() instead of
 
 
 ### Current Issues 
-When Chrome is running it blocks access to some sensitive folders, in this case the User Data folder which is located in the AppData folder. A basic solution that can be used to bypass the browser's protection technique is the termination of the running chrome process. This brute force approach is not ideal because it can cause a browser to lose usaved,including important data, if it is abruptly terminated. A much better approach, and the future implemetation in the works, is code injection. With this technique, executable code can be injected in a running chrome instance. This injected code will have the privelages to access the browser's folders and internal data,  without restrictions.	
+When Chrome is running it blocks access to some sensitive folders, in this case the User Data folder which is located in the AppData folder. A basic solution that can be used to bypass the browser's protection mechanism is the termination of the running Chrome process. This brute force approach is not ideal because it can cause a browser to lose usaved data. A better solution, and the future implemetation in the works, is code injection. With this technique, executable code can be injected in a running chrome instance. This injected code will have the privelages to access the browser's folders and internal data, without restrictions.	
 
 ### Compiling The Source Code
 The source code is compiled with Developer Command Prompt for Visual Studio 2015
