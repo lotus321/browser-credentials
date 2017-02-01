@@ -2,7 +2,7 @@
 
 ### Introduction
 
-Most modern Web Browsers give users the option of saving Login details when they visit website that require a username and password to log in. 
+Modern Web Browsers give users the option of saving Login details when they visit website that require a username and password to log in. 
 The Chrome browser stores these credentials in a file called Login Data. This file, which is located in a user's AppData folder, stores the data in a database format. The Login ID (username or email) is stored in plain text and the password is encrypted as a 230 byte binary BLOB. To extract this password BLOB, two approaches will be employed; using a database libray and raw binary parsing.
 
 
