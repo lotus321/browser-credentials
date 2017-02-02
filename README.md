@@ -3,13 +3,13 @@
 ### Introduction
 
 Modern Web Browsers give users the option of saving Login credentials when they visit websites that require a username and password combination to log in. 
-The Chrome browser stores these credentials in a file called Login Data. This file, which on the Windows OS is located in a user's AppData folder, stores the data in a database format. The Login ID (username or email) is stored in plain text and the password is encrypted as a 230 byte binary BLOB. To extract and decrypt this password BLOB, two approaches will be employed; using a database libray and raw binary parsing.
+The Chrome browser stores these credentials in a file called Login Data. This file, which on the Windows OS is located in the user's AppData folder, stores the data in a database format. The Login ID (username or email) is stored in plain text and the password is encrypted as a 230 byte binary BLOB. To extract and decrypt this password BLOB, two approaches will be employed; using a database libray and raw binary parsing.
 
 
  
 ### Parsing with Database Library
 Using the Sqlite3 DLL is the recommended approach as it simplifies the process of parsing the login credentials and runs on both 32 & 64 bits Windows.
-To reduce the size of the executable file, the dll library is not staticaly linked. Instaed, the library is fetched from a remote server and dynamically loaded into the process's memory space. This is necessary becasue certain security programs, AVs in particular, will prevent a program from saving an executable file.
+To reduce the size of the executable file, the dll library is not staticaly linked at during compilation. Instaed, the library is downloaded from a remote server and dynamically loaded into the process's memory space without saving the file to the disk. This is necessary becasue certain security programs, AVs in particular, will prevent a program from saving an executable file.
 By executing the DLL in-memory, the program cannot depend on the windows loader (and certainly can't use the `LoadLibrary` WinAPI).
 To function as intended, the program will have to manually allocate memory (with executable rights), resolve all external dependences, perform base relocation, locate the entry point and finally pass control to the DLL.
 
