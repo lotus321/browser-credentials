@@ -19,6 +19,7 @@ The approach has the advantage of removing the dependence on the database librar
 As stated earlier only the passwords are encrypted, the login IDs are stored in plain text.  
 Through visual inspection with a Hex Editor, it can be observed that the password BLOB starts with a unique sequence of bytes.
 The file itself is very large, only a smaller section corresponding to one credential entry is shown. After analysing the binaries with an the hex editor, it can be observed that  each entry of  credentials for a particulr website is serapated by rows of null bytes ```0x00```, and the password BLOB starts with a unique sequence of bytes.
+![hex](https://cloud.githubusercontent.com/assets/22178295/22538428/61ef35b4-e966-11e6-9590-3c8f07224fa4.PNG)
 
 
 
