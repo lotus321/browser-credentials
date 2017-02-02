@@ -9,7 +9,7 @@ The Chrome browser stores these credentials in a file called Login Data. This fi
  
 ### Parsing with Database Library
 Using the Sqlite3 DLL is the recommended approach as it simplifies the process of parsing the login credentials and runs on both 32 & 64 bits Windows.
-To reduce the size of the executable file, the dll library is not staticaly linked at during compilation. Instaed, the library is downloaded from a remote server and dynamically loaded into the process's memory space without saving the file to the disk. This is necessary becasue certain security programs, AVs in particular, will prevent a program from saving an executable file.
+To reduce the size of the executable file, the dll library is not staticaly linked at compilation. Instaed, the library is downloaded from a remote server and dynamically loaded into the process's memory space without saving the file to the disk. This is necessary becasue certain security programs, AVs in particular, will prevent a program from saving an executable file.
 By executing the DLL in-memory, the program cannot depend on the windows loader (and certainly can't use the `LoadLibrary` WinAPI).
 To function as intended, the program will have to manually allocate memory (with executable rights), resolve all external dependences, perform base relocation, locate the entry point and finally pass control to the DLL.
 
