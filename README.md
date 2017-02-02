@@ -15,10 +15,12 @@ To function as intended, the program will have to manually allocate memory (with
 
 
 ### Raw Binary Parsing
-To avoid statically linking a large library file, this approach parses the login credentials manually.
-As stated earlier, the username\email is stored in plain text. 
-Using a Hex Editor, the Login Data file is parsed manually, using Inline Assembler, to locate the password BLOB.
-But why go through all this trouble? The second approach was more about challenging myself and playing around with Assembler code.
+The approach has the advantage of removing the dependence on the database library file by manually parsing the login credentials.
+As stated earlier only the passwords are encrypted, the login IDs are stored in plain text.  
+Through visual inspection with a Hex Editor, it can be observed that the password BLOB starts with a unique sequence of bytes.
+The file itself is very large, only a smaller section corresponding to one credential entry is shown. After analysing the binaries with an the hex editor, it can be observed that  each entry of  credentials for a particulr website is serapated by rows of null bytes ```0x00```, and the password BLOB starts with a unique sequence of bytes.
+
+
 
 
 
