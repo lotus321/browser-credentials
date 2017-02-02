@@ -1,4 +1,4 @@
-## A Native Windows Password Recovery Tool for Chrome
+## A Windows Password Recovery Tool for Chrome
 
 ### Introduction
 
