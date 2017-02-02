@@ -17,12 +17,18 @@ To function as intended, the program will have to manually allocate memory (with
 ### Raw Binary Parsing
 The approach has the advantage of removing the dependence on the database library file by manually parsing the login credentials.
 As stated earlier only the passwords are encrypted, the login IDs are stored in plain text.  
-Through visual inspection with a Hex Editor, it can be observed that the password BLOB starts with a unique sequence of bytes.
 The file itself is very large, only a smaller section corresponding to one credential entry is shown. After analysing the binaries with an the hex editor, it can be observed that  each entry of  credentials for a particulr website is serapated by rows of null bytes ```0x00```, and the password BLOB starts with a unique sequence of bytes.
+
 ![hex](https://cloud.githubusercontent.com/assets/22178295/22538428/61ef35b4-e966-11e6-9590-3c8f07224fa4.PNG)
 
+To help with the visual analysis of the hex data, the data corresponding to the website name is in green, data for the email/username in blue, and that of the encrypted password blob in red.
+Ok, now looking at ascii characters, the website name and login name can clearly be seen as http//:www.linkedin.com and login ID:m.mike@yahoo.com, respectively. This indicates that chrome does not encrypt these credentials.
+Again, refering to the ascii characters, shortly after the website name, are encrypted or put it simply "unredable" characters. Looking at offset ```00005510```, these characters are represented by ```OÂ—ë....tý.¿ÒÖÞI```, that is the start of the encrypted passsord.
 
+Through visual inspection with a Hex Editor, it can be observed found the sequence of bytes ```08 0D 0D 0D 08 08``` which are located at offset offset ```000054A0``` indicates the start to each unique credential entry. 
 
+The index to the password blob can is at the start of the "unreadable" ascii characters, shown at offset ```0005510``` . The corresponding  sequence of 16  bytes, ```[01 00 00 00 D0 8C 9D DF 01 15 D1 11 8C 7A 00 C0 ]``` indicates the start index to the password BLOB
+ After the index to this sequence is located, the next 260 bytes of the data are then decrypted using the```CryptUnprotectData```  WinAPI.
 
 
 ### Why Implement Custom Memory Functions
