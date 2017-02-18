@@ -32,7 +32,7 @@ After analysing the binaries with an the hex editor, it can be observed that  ea
 
 To help with the visual analysis of the hex data, the data corresponding to the website name is in green, data for the email/username in blue, and that of the encrypted password blob in red.
 
-Ok, now looking at ascii characters, the website name and login name can clearly be seen as http//:www.linkedin.com and login ID:m.mike@yahoo.com, respectively. This indicates that chrome does not encrypt these credentials.
+Ok, now looking at ascii characters, the website name and login name can clearly be seen as ```http//:www.linkedin.com``` and login ```m.mike@yahoo.com```, respectively. This indicates that chrome does not encrypt these credentials.
 Again, refering to the ascii characters, shortly after the website name, are encrypted or put it simply "unredable" characters. Looking at offset ```00005510```, these characters are represented by ```OÂ—ë....tý.¿ÒÖÞI```, that is the start of the encrypted passsord.
 
 Through visual inspection with a Hex Editor, it can be observed found the sequence of bytes ```08 0D 0D 0D 08 08``` which are located at offset offset ```000054A0``` indicates the start to each unique credential entry. 
