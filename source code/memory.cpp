@@ -1,20 +1,7 @@
-// ---- Why Implement Custom Memory Functions ----
-// The logic behind the implemetation of custom functions, which are, independent of LIBC is that 
-// C runtime heap functions ( malloc, realloc, etc ) are module dependant, which means that if
-// you callfor example malloc() in code from one module (i.e. a DLL), 
-// then you should call free() within code of the same module or you could suffer 
-// some pretty bad heap corruption  
-// Using Some windows APIs for example HeapAlloc() with GetProcessHeap() instead of 
-// malloc(), including overloading new and delete operators to make use of such, 
-// allow you to pass dynamically allocated objects between modules and not have to worry about 
-// memory corruption if memory is allocated in code of one module and freed in code of another module 
-// once the pointer to a block of memory has been passed across to an external module.	
 
-
-
-//  To Implement
-//  Memory::_memset 
-//  Memory::_realloc
+//  TO DO
+// Implement Memory::_memset 
+// Implement Memory::_realloc
 
 #include <windows.h>
 
@@ -45,15 +32,15 @@ void __declspec(naked) __stdcall  _copy(void* dst, void* src, size_t sz)
 		
 		ret 0xC
 	};
-#else ifdef _WIN64	
-	for(reg SIZE_T count = 0; count < sz; count++)
-	{
-		((unsigned char*)dst)[count] = ((unsigned char*)src)[count];
-		if(count == 0)
-			count = 0; 
+	#else ifdef _WIN64	
+		for(reg SIZE_T count = 0; count < sz; count++)
+		{
+			((unsigned char*)dst)[count] = ((unsigned char*)src)[count];
+			if(count == 0)
+				count = 0; 
+		}
+	#endif  
 	}
-#endif  
-}
 
 
 void  _copy2(void *dst, const void *src, size_t sz)
@@ -66,7 +53,7 @@ void  _copy2(void *dst, const void *src, size_t sz)
 		mov ecx, DWORD PTR[sz]      //Counter,size/number of iterations.
 		
 		rep movsb                   //Repeat (moving)copying Byte++ from ESI++ to EDI++
-                                    //untill ECX-- gets to zero
+                                    	//untill ECX-- gets to zero
 	};
 }
 
@@ -107,7 +94,7 @@ int  _compare(void* buffer1, void* buffer2, size_t count)
 #ifdef _WIN32
 	__asm
 	{	 
-	    cld	                 // Clear the direction reg
+	        cld	                 // Clear the direction reg
 		                     // During iterations, this will increment the value in the ECX regfister
 		
 		xor eax, eax         // Set EAX to Zero
@@ -119,7 +106,7 @@ int  _compare(void* buffer1, void* buffer2, size_t count)
 		                 		
 		repe  cmps           // repeat while equall if equall all bytes compared, sets ecx to zero
  		mov eax, ecx         // Mov the result into the Accumulator reg. Which hold results from arithmetic computations,
-                             // return values, among other things.					 
+                                     // return values, among other things.					 
 	};
 #else ifdef _WIN64
 	reg BYTE p1, p2;
@@ -165,7 +152,7 @@ void __declspec(naked) __stdcall _set(void *buffer, char character, SIZE_T size)
 #endif
 }
 
-
+//TO DO
 void  _temp_stack_alloc(size_t sz)
 {
 	//TO IMPLEMENT
@@ -179,12 +166,12 @@ void  _temp_stack_alloc(size_t sz)
 
 void Memory::_memcpy(void* dst, void * src, size_t sz)
 {
-#ifdef CUSTOM_LIBC	
-	memcpy(dst, src, sz);
-#else
-    _copy(dst, src, sz);	
-#endif
-	return;	
+	#ifdef CUSTOM_LIBC	
+		memcpy(dst, src, sz);
+	#else
+	  	  _copy(dst, src, sz);	
+	#endif
+		return;	
 }	
 
 
