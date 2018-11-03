@@ -1,7 +1,7 @@
 ### Introduction
 Recently I found myself in those situation where I couldn't remember the login password to a website. <br />
 To overcome the problem at hand, I decided to code a password decrypter to recover password stored in the Chrome Browser read more. <br />
-Please refer to this [article](http://www.mbowa.net/#chrome) for a detailed analysis of binary file used in the project.
+Please refer to this [article](http://www.mbowa.net/#chrome) for a detailed analysis of the binary file used in the project.
 
 ### Background
 Modern Web Browsers give users the option of saving Login credentials when they visit websites that require a username and password combination to log in. 
