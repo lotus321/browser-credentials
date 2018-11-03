@@ -1,10 +1,8 @@
-## A Windows Password Recovery Tool for Chrome
-
 ### Introduction
-Recently I found myself in those situation where I couldn't remember the login password to a website.
+Recently I found myself in those situation where I couldn't remember the login password to a website. <br />
 To overcome the problem at hand, I decided to code a password decrypter to recover password stored in the Chrome Browser read more 
 
-## Background
+### Background
 Modern Web Browsers give users the option of saving Login credentials when they visit websites that require a username and password combination to log in. 
 
 The Chrome browser stores these credentials in a file called Login Data. This file, which on the Windows OS is located in the user's AppData folder, stores the data in a database format. The Login ID (username or email) is stored in plain text and the password is encrypted as a 230 byte binary BLOB. 
